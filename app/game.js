@@ -1,8 +1,7 @@
 window.onload = function() {
 	//start crafty
 	Config.init();
-	
-	
+
 	
 	//method to randomy generate the map
 	function generateWorld() {
@@ -10,16 +9,16 @@ window.onload = function() {
 		for(var i = 0; i < 25; i++) {
 			//positioning the tree sprite
 			Crafty.e("2D, Canvas, tree")
-					.attr({x: 0, y: 200});
+					.attr({x: 180, y: 220});
 
-			Crafty.e("2D, Canvas, pidgeon")
-					.attr({x: 120, y: 300});
 			Crafty.e("2D, Canvas, pidgeon")
 					.attr({x: 180, y: 300});
 			Crafty.e("2D, Canvas, pidgeon")
-					.attr({x: 240, y: 300});
+					.attr({x: 250, y: 250});
 			Crafty.e("2D, Canvas, pidgeon")
-					.attr({x: 300, y: 300});		
+					.attr({x: 320, y: 300});
+			Crafty.e("2D, Canvas, pidgeon")
+					.attr({x: 380, y: 200});
 
 			//generate the grass along the y-axis
 			for(var j = 0; j < 20; j++) {
@@ -178,7 +177,15 @@ window.onload = function() {
 			.animate("walk_right", 0, 2, 3)
 			.animate("walk_up", 3, 3, 5)
 			.animate("walk_down", 0, 3, 2)
-			.bind("enterframe", function(e) {
+			.bind("keyup", function(e) {
+				if(e.keyIdentifier == 'Left') {
+					this.stop().animate("walk_left", 0);
+				}
+				else if(e.keyIdentifier == 'Right') {
+					this.stop().animate("walk_right", 0);
+				}
+			})
+			.bind("keydown", function(e){
 				if(this.isDown("LEFT_ARROW")) {
 					if(!this.isPlaying("walk_left"))
 						this.stop().animate("walk_left", 10);
@@ -186,15 +193,6 @@ window.onload = function() {
 					if(!this.isPlaying("walk_right"))
 						this.stop().animate("walk_right", 10);
 				}
-				// else if(this.isDown("UP_ARROW")) {
-				// 	if(!this.isPlaying("walk_up"))
-				// 		this.stop().animate("walk_up", 10);
-				// } else if(this.isDown("DOWN_ARROW")) {
-				// 	if(!this.isPlaying("walk_down"))
-				// 		this.stop().animate("walk_down", 10);
-				// }
-			}).bind("keyup", function(e) {
-				this.stop();
 			})
 			.collision()
 			.onHit("wall_left", function() {

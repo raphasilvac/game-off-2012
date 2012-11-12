@@ -1,15 +1,24 @@
 config = function() {
 	return ({
+		/**
+		 * Configure init here
+		 */
 		init: function() {
 			Crafty.init(600, 500);
 			this.canvas();
 			this.sprite();
 		},
 
+		/**
+		 * Configure canvas here
+		 */
 		canvas: function() {
 			Crafty.canvas();
 		},
 
+		/**
+		 * Configure sprites here
+		 */
 		sprite: function() {
 			//turn the sprite map into usable components
 			Crafty.sprite(16, "img/lumberjack_sheet.png", {

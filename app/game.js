@@ -74,11 +74,11 @@ window.onload = function() {
 	Crafty.scene("loading");
 	
 	Crafty.c("asteroid", {
-			init: function() {
+			init: function(a, b) {
 				this.origin("center");
 				this.attr({
-					x: 300, //give it random positions, rotation and speed
-					y: 300,
+					x: Crafty.randRange(180, 400), //give it random positions, rotation and speed
+					y: Crafty.randRange(250, 350),
 					//xspeed: Crafty.randRange(1, 2), 
 					xspeed: 0, 
 					yspeed: Crafty.randRange(1, 2), 
@@ -128,7 +128,7 @@ window.onload = function() {
 					
 					//asteroidCount++;
 					//split into two asteroids by creating another asteroid
-					Crafty.e("2D, DOM, "+size+", Collision, asteroid").attr({x: this._x, y: this._y});
+					//Crafty.e("2D, DOM, "+size+", Collision, asteroid").attr({x: this._x, y: this._y});
 				});
 				
 			}
@@ -154,12 +154,6 @@ window.onload = function() {
 					else if(this.isDown("S")) this.x = 180;
 					else if(this.isDown("D")) this.x = 240;
 					else if(this.isDown("F")) this.x = 300;
-					else if(this.isDown("Q")) {
-
-						//Crafty.e("2D, DOM, big, Collision, asteroid");
-						Crafty.e("2D, DOM, strawberry, Collision, asteroid");
-						
-					}
 					// else if(this.isDown("UP_ARROW")) this.y -= this._speed;
 					// else if(this.isDown("DOWN_ARROW")) this.y += this._speed;
 				});
@@ -167,6 +161,10 @@ window.onload = function() {
 				return this;
 			}
 		});
+
+		setInterval(function(){
+			Crafty.e("2D, DOM, strawberry, Collision, asteroid");
+		}, 1000);
 		
 		//create our player entity with some premade components
 		player = Crafty.e("2D, Canvas, lumberJack, Controls, CustomControls, Animate, Collision")
